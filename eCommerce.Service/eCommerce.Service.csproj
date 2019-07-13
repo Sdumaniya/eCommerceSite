@@ -88,6 +88,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\eCommerce.DB.mdf" />
+    <Content Include="App_Data\eCommerce.DB_log.ldf">
+      <DependentUpon>eCommerce.DB.mdf</DependentUpon>
+    </Content>
     <Content Include="bin\eCommerce.Core.dll" />
     <Content Include="bin\eCommerce.Core.pdb" />
     <Content Include="bin\eCommerce.DB.mdf" />
@@ -162,7 +166,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
