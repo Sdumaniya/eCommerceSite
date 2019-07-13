@@ -94,17 +94,6 @@
     <Compile Include="Repositories\ProductRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\eCommerce.Core.dll" />
-    <Content Include="bin\Debug\eCommerce.Core.pdb" />
-    <Content Include="bin\Debug\eCommerce.DB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\eCommerce.DB_log.ldf">
-      <DependentUpon>eCommerce.DB.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\EntityFramework.dll" />
-    <Content Include="bin\Debug\EntityFramework.xml" />
     <Content Include="eCommerce.DB.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -149,7 +138,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="bin\Debug\eCommerce.Core.dll.config" />
     <None Include="eCommrece.edmx.diagram">
       <DependentUpon>eCommrece.edmx</DependentUpon>
     </None>
