@@ -1,0 +1,54 @@
+﻿@model eCommerce.Core.Product
+
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="row">&nbsp;</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <button class="btn btn-info float-right" data-toggle="modal" data-target="#CreateProductModel"><i class="glyphicon glyphicon-plus"></i> Add New Product</button>
+    </div>
+</div>
+
+<div class="row">&nbsp;</div>
+
+<table id="tblProducts" class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </tfoot>
+</table>
+
+<!-- The Modal -->
+<div class="modal" id="CreateProductModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                @{ Html.RenderPartial("AddProduct"); }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section script{
+    <script type="text/javascript">
+        loadProducts();
+    </script>
+}

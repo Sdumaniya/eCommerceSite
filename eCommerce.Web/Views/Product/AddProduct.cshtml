@@ -1,0 +1,80 @@
+﻿@model eCommerce.Web.Models.ProductModelView
+
+@using (Html.BeginForm("CreateProduct", "Product", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Product</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProdCatId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.ProdCatId, new { htmlAttributes = new { @class = "form-control" } })*@
+                @*@Html.DropDownListFor(ViewData["ProductCategory"]  => model.ProdCatId, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownListFor(x => x.ProdCatId, (IEnumerable<SelectListItem>)ViewData["ProductCategory"], new { @class = "form-control", id = "ProductCategory" })
+                @Html.ValidationMessageFor(model => model.ProdCatId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <table class="table table-bordered" id="tblProductAttributes">
+                    <thead>
+                        <tr>
+                            <th>Attribute Name</th>
+                            <th>Attribute Value</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProdName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProdName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProdName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProdDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProdDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProdDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ProductCategory").on("change", function () {
+            loadData();
+        });
+
+        function loadData() {
+            $.post("/Product/GetProductAttributes/" + $("#ProductCategory").val()).then(function (data) {
+                $("#tblProductAttributes tbody").empty();
+                for (var item in data) {
+                    $("#tblProductAttributes").append('<tr><td>' + data[item].AttributeName + '</td><td><input type="text" name="AttributeValue[' + item + ']" class="form-control" placeholder="Attribute Value" /> <input type="hidden" name="AttributeKey[' + item + ']" value="' + data[item].AttributeId + '" class="form-control" /></td></tr>');
+                }
+            }, function () {
+                console.log("Something went wrong while fetching items");
+            });
+        }
+
+        loadData();
+    });
+</script>
